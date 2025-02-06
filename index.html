@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Hesaplama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input {
+            width: 80%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Not Hesaplama</h2>
+        <form id="gradeForm">
+            <label>Dilbilgisi ve Kelime:</label>
+            <input type="number" id="grammar" min="0" max="100"><br>
+            
+            <label>Yazma Sınavları:</label>
+            <input type="number" id="writing" min="0" max="100"><br>
+            
+            <label>Konuşma Sınavları:</label>
+            <input type="number" id="speaking" min="0" max="100"><br>
+            
+            <label>Dinleme Sınavları:</label>
+            <input type="number" id="listening" min="0" max="100"><br>
+            
+            <label>Okuma Sınavları:</label>
+            <input type="number" id="reading" min="0" max="100"><br>
+            
+            <label>Proje Ödevi:</label>
+            <input type="number" id="project" min="0" max="100"><br>
+            
+            <label>Online Practice:</label>
+            <input type="number" id="online" min="0" max="100"><br>
+            
+            <label>Sınıf İçi Performans:</label>
+            <input type="number" id="performance" min="0" max="100"><br>
+            
+            <label>Quiz 1:</label>
+            <input type="number" id="quiz1" min="0" max="100"><br>
+            
+            <label>Listening Quizi:</label>
+            <input type="number" id="listeningQuiz" min="0" max="100"><br>
+            
+            <label>Reading Quizi:</label>
+            <input type="number" id="readingQuiz" min="0" max="100"><br>
+            
+            <label>Quiz 2:</label>
+            <input type="number" id="quiz2" min="0" max="100"><br>
+            
+            <label>Sınıf İçi Yazma Uygulamaları:</label>
+            <input type="number" id="writingPractice" min="0" max="100"><br>
+            
+            <button type="button" onclick="calculateGrade()">Hesapla</button>
+        </form>
+        
+        <h3>Toplam Not: <span id="totalGrade">-</span></h3>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            const weights = {
+                grammar: 15,
+                writing: 10,
+                speaking: 10,
+                listening: 10,
+                reading: 10,
+                project: 5,
+                online: 5,
+                performance: 5,
+                writingPractice: 10
+            };
+
+            let total = 0;
+            for (let key in weights) {
+                let value = document.getElementById(key).value;
+                total += (value ? parseFloat(value) : 0) * (weights[key] / 100);
+            }
+            
+            // Küçük sınavların ortalaması
+            let quiz1 = parseFloat(document.getElementById("quiz1").value) || 0;
+            let listeningQuiz = parseFloat(document.getElementById("listeningQuiz").value) || 0;
+            let readingQuiz = parseFloat(document.getElementById("readingQuiz").value) || 0;
+            let quiz2 = parseFloat(document.getElementById("quiz2").value) || 0;
+            let quizAverage = (quiz1 + listeningQuiz + readingQuiz + quiz2) / 4;
+            
+            total += quizAverage * (20 / 100);
+            
+            document.getElementById("totalGrade").innerText = total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
