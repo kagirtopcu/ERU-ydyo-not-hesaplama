@@ -9,23 +9,82 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
+            background-color: #f5f5f5;
         }
         .container {
-            max-width: 400px;
+            max-width: 600px;
             margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .input-group:hover {
+            background-color: #f9f9f9;
+        }
+        label {
+            flex: 1;
+            text-align: left;
+            margin-right: 10px;
         }
         input {
-            width: 80%;
+            width: 80px;
             padding: 8px;
-            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76,175,80,0.2);
         }
         button {
-            padding: 10px 15px;
-            margin-top: 10px;
+            padding: 12px 25px;
+            margin-top: 20px;
             cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .weight-info {
+            font-size: 12px;
+            color: #666;
+            margin-left: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+            margin-top: 5px;
+        }
+        .pass {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .fail {
+            color: #f44336;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -33,52 +92,100 @@
     <div class="container">
         <h2>Not Hesaplama</h2>
         <form id="gradeForm">
-            <label>Wse of English:</label>
-            <input type="number" id="grammar" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Use of English:</label>
+                <input type="number" id="grammar" min="0" max="100" step="0.1">
+                <span class="weight-info">(%15)</span>
+            </div>
             
-            <label>Writing:  </label>
-            <input type="number" id="writing" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Writing:</label>
+                <input type="number" id="writing" min="0" max="100" step="0.1">
+                <span class="weight-info">(%10)</span>
+            </div>
             
-            <label>Speaking:</label>
-            <input type="number" id="speaking" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Speaking:</label>
+                <input type="number" id="speaking" min="0" max="100" step="0.1">
+                <span class="weight-info">(%10)</span>
+            </div>
             
-            <label>Listenign:</label>
-            <input type="number" id="listening" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Listening:</label>
+                <input type="number" id="listening" min="0" max="100" step="0.1">
+                <span class="weight-info">(%10)</span>
+            </div>
             
-            <label>Reading:</label>
-            <input type="number" id="reading" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Reading:</label>
+                <input type="number" id="reading" min="0" max="100" step="0.1">
+                <span class="weight-info">(%10)</span>
+            </div>
             
-            <label>Project Assignment:</label>
-            <input type="number" id="project" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Project Assignment:</label>
+                <input type="number" id="project" min="0" max="100" step="0.1">
+                <span class="weight-info">(%5)</span>
+            </div>
             
-            <label>Online Practice:</label>
-            <input type="number" id="online" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Online Practice:</label>
+                <input type="number" id="online" min="0" max="100" step="0.1">
+                <span class="weight-info">(%5)</span>
+            </div>
             
-            <label>In-Class Performance:</label>
-            <input type="number" id="performance" min="0" max="100"><br>
+            <div class="input-group">
+                <label>In-Class Performance:</label>
+                <input type="number" id="performance" min="0" max="100" step="0.1">
+                <span class="weight-info">(%5)</span>
+            </div>
             
-            <label>Coursbook-1:</label>
-            <input type="number" id="quiz1" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Coursebook-1:</label>
+                <input type="number" id="quiz1" min="0" max="100" step="0.1">
+                <span class="weight-info">(Quiz Ort. %20)</span>
+            </div>
             
-            <label>Listening Quizi:</label>
-            <input type="number" id="listeningQuiz" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Listening Quiz:</label>
+                <input type="number" id="listeningQuiz" min="0" max="100" step="0.1">
+                <span class="weight-info">(Quiz Ort. %20)</span>
+            </div>
             
-            <label>Reading Quizi:</label>
-            <input type="number" id="readingQuiz" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Reading Quiz:</label>
+                <input type="number" id="readingQuiz" min="0" max="100" step="0.1">
+                <span class="weight-info">(Quiz Ort. %20)</span>
+            </div>
             
-            <label>Coursbook-2:</label>
-            <input type="number" id="quiz2" min="0" max="100"><br>
+            <div class="input-group">
+                <label>Coursebook-2:</label>
+                <input type="number" id="quiz2" min="0" max="100" step="0.1">
+                <span class="weight-info">(Quiz Ort. %20)</span>
+            </div>
             
-            <label>In-Class Writing:</label>
-            <input type="number" id="writingPractice" min="0" max="100"><br>
+            <div class="input-group">
+                <label>In-Class Writing:</label>
+                <input type="number" id="writingPractice" min="0" max="100" step="0.1">
+                <span class="weight-info">(%10)</span>
+            </div>
+
+            <div class="error" id="error-message">Lütfen tüm notları 0-100 arasında giriniz.</div>
             
             <button type="button" onclick="calculateGrade()">Hesapla</button>
         </form>
         
-        <h3>Toplam Not: <span id="totalGrade">-</span></h3>
+        <div class="result">
+            <h3>Toplam Not: <span id="totalGrade">-</span></h3>
+            <div id="passStatus"></div>
+        </div>
     </div>
-
+    
     <script>
+        function validateInput(value) {
+            return value >= 0 && value <= 100;
+        }
+
         function calculateGrade() {
             const weights = {
                 grammar: 15,
@@ -91,23 +198,67 @@
                 performance: 5,
                 writingPractice: 10
             };
-
+            
             let total = 0;
+            let allValid = true;
+            
+            // Input validation
             for (let key in weights) {
-                let value = document.getElementById(key).value;
-                total += (value ? parseFloat(value) : 0) * (weights[key] / 100);
+                let value = parseFloat(document.getElementById(key).value);
+                if (isNaN(value) || !validateInput(value)) {
+                    allValid = false;
+                    document.getElementById(key).style.borderColor = 'red';
+                } else {
+                    document.getElementById(key).style.borderColor = '#ddd';
+                }
             }
             
-            // Küçük sınavların ortalaması
-            let quiz1 = parseFloat(document.getElementById("quiz1").value) || 0;
-            let listeningQuiz = parseFloat(document.getElementById("listeningQuiz").value) || 0;
-            let readingQuiz = parseFloat(document.getElementById("readingQuiz").value) || 0;
-            let quiz2 = parseFloat(document.getElementById("quiz2").value) || 0;
-            let quizAverage = (quiz1 + listeningQuiz + readingQuiz + quiz2) / 4;
+            // Quiz validation
+            const quizIds = ['quiz1', 'listeningQuiz', 'readingQuiz', 'quiz2'];
+            for (let id of quizIds) {
+                let value = parseFloat(document.getElementById(id).value);
+                if (isNaN(value) || !validateInput(value)) {
+                    allValid = false;
+                    document.getElementById(id).style.borderColor = 'red';
+                } else {
+                    document.getElementById(id).style.borderColor = '#ddd';
+                }
+            }
             
+            const errorMessage = document.getElementById('error-message');
+            if (!allValid) {
+                errorMessage.style.display = 'block';
+                document.getElementById('totalGrade').innerText = '-';
+                document.getElementById('passStatus').innerText = '';
+                return;
+            }
+            errorMessage.style.display = 'none';
+            
+            // Calculate weighted grades
+            for (let key in weights) {
+                let value = parseFloat(document.getElementById(key).value) || 0;
+                total += value * (weights[key] / 100);
+            }
+            
+            // Calculate quiz average
+            let quizTotal = 0;
+            for (let id of quizIds) {
+                quizTotal += parseFloat(document.getElementById(id).value) || 0;
+            }
+            let quizAverage = quizTotal / 4;
             total += quizAverage * (20 / 100);
             
-            document.getElementById("totalGrade").innerText = total.toFixed(2);
+            // Display results
+            const finalGrade = total.toFixed(2);
+            document.getElementById('totalGrade').innerText = finalGrade;
+            
+            // Display pass/fail status
+            const passStatus = document.getElementById('passStatus');
+            if (total >= 70) {
+                passStatus.innerHTML = '<p class="pass">GEÇTİ</p>';
+            } else {
+                passStatus.innerHTML = '<p class="fail">KALDI</p>';
+            }
         }
     </script>
 </body>
