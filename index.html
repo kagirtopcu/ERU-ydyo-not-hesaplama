@@ -27,6 +27,9 @@
             margin-top: 10px;
             cursor: pointer;
         }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -76,6 +79,7 @@
         </form>
         
         <h3>Toplam Not: <span id="totalGrade">-</span></h3>
+        <p id="gradeComment"></p>
     </div>
 
     <script>
@@ -93,11 +97,26 @@
             };
 
             let total = 0;
+            let errorMessage = "";
+
             for (let key in weights) {
                 let value = document.getElementById(key).value;
-                total += (value ? parseFloat(value) : 0) * (weights[key] / 100);
+                if (value === "") {
+                    errorMessage = "Lütfen tüm alanları doldurun!";
+                    break;
+                } else if (value < 0 || value > 100) {
+                    errorMessage = "Lütfen 0 ile 100 arasında geçerli bir değer girin!";
+                    break;
+                }
+                total += (parseFloat(value) * (weights[key] / 100));
             }
-            
+
+            if (errorMessage) {
+                document.getElementById("gradeComment").innerHTML = `<span class="error">${errorMessage}</span>`;
+                document.getElementById("totalGrade").innerText = "-";
+                return;
+            }
+
             // Küçük sınavların ortalaması
             let quiz1 = parseFloat(document.getElementById("quiz1").value) || 0;
             let listeningQuiz = parseFloat(document.getElementById("listeningQuiz").value) || 0;
@@ -106,8 +125,20 @@
             let quizAverage = (quiz1 + listeningQuiz + readingQuiz + quiz2) / 4;
             
             total += quizAverage * (20 / 100);
-            
+
+            let gradeComment = "Geçersiz";
+            if (total >= 90) {
+                gradeComment = "Çok İyi";
+            } else if (total >= 75) {
+                gradeComment = "Başarılı";
+            } else if (total >= 60) {
+                gradeComment = "Geçer";
+            } else {
+                gradeComment = "Başarısız";
+            }
+
             document.getElementById("totalGrade").innerText = total.toFixed(2);
+            document.getElementById("gradeComment").innerText = `Değerlendirme: ${gradeComment}`;
         }
     </script>
 </body>
