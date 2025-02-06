@@ -11,6 +11,47 @@
             margin: 20px;
             background-color: #f5f5f5;
         }
+        .menu {
+            background-color: #4CAF50;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .menu a:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+            border-radius: 5px;
+        }
+        .menu .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+       body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
         .container {
             max-width: 600px;
             margin: auto;
@@ -89,6 +130,12 @@
     </style>
 </head>
 <body>
+    <div class="menu">
+        <span class="logo">Not Hesaplama</span>
+        <a href="#">Ana Sayfa</a>
+        <a href="https://github.com/kagirtopcu?tab=repositories">Hakkında</a>
+        <a href="https://github.com/kagirtopcu?tab=repositories">İletişim</a>
+    </div>
     <div class="container">
         <h2>Not Hesaplama</h2>
         <form id="gradeForm">
@@ -261,5 +308,6 @@
             }
         }
     </script>
+    
 </body>
 </html>
